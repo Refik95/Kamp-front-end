@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { listResponseModel } from '../models/ListResponseModel';
+import { ListResponseModel } from '../models/listResponseModel';
 import { Product } from '../models/product';
 import { ResponseModel } from '../models/responseModel';
 
@@ -10,22 +10,21 @@ import { ResponseModel } from '../models/responseModel';
 })
 export class ProductService {
 
-  apiUrl = "https://localhost:44341/api/";
+  apiUrl = 'https://localhost:44314/api/';
+
   constructor(private httpClient: HttpClient) { }
 
-  getProducts():Observable<listResponseModel<Product>>{  
+  getProducts():Observable<ListResponseModel<Product>> {
     let newPath = this.apiUrl + "products/getall"
-    return this.httpClient.get<listResponseModel<Product>>(newPath);  
-    }
-
-    getProductsByCategory(categoryId:number):Observable<listResponseModel<Product>>{  
-      let newPath = this.apiUrl + "products/getbycategory?categoryId="+categoryId
-      return this.httpClient.get<listResponseModel<Product>>(newPath);  
-      }
-
-      add(product:Product):Observable<ResponseModel>{
-        return this.httpClient.post<ResponseModel>(this.apiUrl+"products/add",product)
-      }
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
   }
 
+  getProductsByCategory(categoryId:number):Observable<ListResponseModel<Product>> {
+    let newPath = this.apiUrl + "products/getbycategory?categoryId="+categoryId
+    return this.httpClient.get<ListResponseModel<Product>>(newPath);
+  }
 
+  add(product:Product):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"products/add",product)
+  }
+}
